@@ -9,17 +9,15 @@ var express           = require("express"),
     User              = require("./models/user"),
     Campground        = require("./models/campground"),
     Comment           = require("./models/comment"),
-    methodOverride    = require("method-override"),
-    seedDB            = require("./seeds");
+    methodOverride    = require("method-override");
     app.locals.moment = require('moment');
     
 var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes       = require("./routes/index");
     
-//seedDB(); // seed the database
-//mongoose.connect("mongodb://localhost/yelp_camp");
-mongoose.connect("mongodb://markee:Orange20@ds163650.mlab.com:63650/yelp_camp_application");
+mongoose.connect(process.env.DATABASEURL);
+//mongoose.connect("mongodb://markee:Orange20@ds163650.mlab.com:63650/yelp_camp_application");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
